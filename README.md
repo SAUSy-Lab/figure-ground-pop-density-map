@@ -2,19 +2,21 @@
 
 ---
 
-figure-ground_pop-density_map
+https://sausy-lab.github.io/figure-ground-pop-density-map/index.html
 
 An experiment to combine census population data with building geometries to produce a fine-grained population density map.
 
 Data:
-2016 Block Level Population Data - [Statistics Canada](http://open.canada.ca/data/en/dataset/32f1a777-9fcf-4e4a-8c66-82c66a2e76f1)
-2016 Building Massing Data - [City of Toronto](http://www1.toronto.ca/wps/portal/contentonly?vgnextoid=d431d477f9a3a410VgnVCM10000071d60f89RCRD)
+- 2016 Block Level Population Data - [Statistics Canada](http://open.canada.ca/data/en/dataset/32f1a777-9fcf-4e4a-8c66-82c66a2e76f1)
+- 2016 Building Massing Data - [City of Toronto](http://www1.toronto.ca/wps/portal/contentonly?vgnextoid=d431d477f9a3a410VgnVCM10000071d60f89RCRD)
+
 
 Tools:
-[PostGIS](http://www.postgis.org/) for the spatial joins,
-[QGIS](http://www.qgis.org/en/site/) for the map layout and styling,
-[GDAL](http://www.gdal.org/) for generating raster web tiles,
-[Leaflet](http://leafletjs.com/) for showing in browser
+- [PostGIS](http://www.postgis.org/) for the spatial joins,
+- [QGIS](http://www.qgis.org/en/site/) for the map layout and styling,
+- [GDAL](http://www.gdal.org/) for generating raster web tiles,
+- [Leaflet](http://leafletjs.com/) for showing in browser,
+
 
 The map isn't perfect. i.e. each building does not contain the *correct* living population. It was generated via an areal interpolation method based on volumetric ratios.
 
