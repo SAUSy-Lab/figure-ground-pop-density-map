@@ -1,0 +1,253 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+
+  	<link rel="icon" type="image/png" href="favicon.png" />
+  	<title>Toronto Building Heights</title>
+  	<meta charset="utf-8"/>
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+<style>
+* {
+    margin:0;
+    padding:0;
+}
+
+a {
+  text-decoration: none;
+  color: #febb80;
+}
+
+.all {
+  background-color: #0f0011;
+}
+
+.all #map {
+  width: full;
+  height: calc(100vh - 101px);
+  border-top: grey solid 1px;
+}
+
+.all #top {
+  width: 1114px;
+  height: 100px;
+  background-color: #0f0011;
+}
+
+.all #top #left {
+  /*padding-bottom: 12px;*/
+  margin-bottom: 0px;
+  height: 100px;
+  width: 656px;
+  border-right: grey solid 1px;
+  float: left;
+}
+
+.all #top #left #p1 {
+  padding-left: 15px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  color: #fcfdbf;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 24px
+}
+
+.all #top #left #p2 {
+  padding-left: 18px;
+
+  color: #febb80;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 13px;
+  line-height: 130%;
+}
+
+.all #top #right {
+  /*padding-bottom: 12px;*/
+  /*margin-bottom: 0px;*/
+  margin: 0px;
+  padding: 0px;
+  /*background-color: white;*/
+  height: 100px;
+  width: 451px;
+  /*border-right: grey solid 1px;*/
+  float:right;
+}
+
+.all #top #left:hover {
+  background-color: #231151;
+}
+
+.all #top #right #legend {
+  /*padding-bottom: 12px;*/
+  /*margin-bottom: 0px;*/
+  margin: 0px;
+  padding: 0px;
+  margin-top: 20px;
+  margin-left: 20px;
+  /*background-color: white;*/
+  height: 15px;
+  width: 356px;
+  border-right: grey solid 1px;
+  border-left: grey solid 1px;
+  /*background-color: blue;*/
+}
+
+.all #top #right #legend #l1 {
+  float: left;
+  background-color: #231151;
+  height: 15px;
+  width: 50px;
+  border-right: grey solid 1px;
+}
+.all #top #right #legend #l2 {
+  float: left;
+  background-color: #5e177f;
+  height: 15px;
+  width: 50px;
+  border-right: grey solid 1px;
+}
+.all #top #right #legend #l3 {
+  float: left;
+  background-color: #982c80;
+  height: 15px;
+  width: 50px;
+  border-right: grey solid 1px;
+}
+.all #top #right #legend #l4 {
+  float: left;
+  background-color: #d3426e;
+  height: 15px;
+  width: 50px;
+  border-right: grey solid 1px;
+}
+.all #top #right #legend #l5 {
+  float: left;
+  background-color: #f8765c;
+  height: 15px;
+  width: 50px;
+  border-right: grey solid 1px;
+}
+.all #top #right #legend #l6 {
+  float: left;
+  background-color: #febb80;
+  height: 15px;
+  width: 50px;
+  border-right: grey solid 1px;
+}
+.all #top #right #legend #l7 {
+  float: left;
+  background-color: #fcfdbf;
+  height: 15px;
+  width: 50px;
+}
+
+.all #top #right #p3 {
+  padding-left: 15px;
+  padding-top: 4px;
+  color: #fcfdbf;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 13px;
+  line-height: 130%;
+}
+
+.all #top #right #p4 {
+  padding-left: 100px;
+  padding-top: 6px;
+  color: #febb80;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 13px;
+  line-height: 130%;
+}
+
+
+.all .over {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    height: 250px;
+    width: 250px;
+    background-color: white;
+}
+
+.leaflet-container {
+    background: #000000;
+}
+
+</style>
+
+<div class="all">
+  <div id="top">
+    <a href="LINK" target="_blank">
+    <div id="left">
+      <p id="p1">Toronto Figure-Ground Population Density Map</p>
+      <p id="p2">built by Jeff Allen with PostGIS, QGIS, gdal2tiles.py, and LeafLet
+      via <br>data from the City of Toronto (2016) and Statistics Canada (2016) - <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+    </div>
+    </a>
+    <div id="right">
+      <div id="legend">
+        <div id="l1"></div>
+        <div id="l2"></div>
+        <div id="l3"></div>
+        <div id="l4"></div>
+        <div id="l5"></div>
+        <div id="l6"></div>
+        <div id="l7"></div>
+      </div>
+      <p id="p3">
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp2
+        &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp4
+        &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp 8
+        &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp16
+        &nbsp &nbsp &nbsp &nbsp&nbsp32
+        &nbsp &nbsp &nbsp&nbsp&nbsp64
+      </p>
+      <p id="p4">
+        number of people per 10 m^2
+      </p>
+    </div>
+  </div>
+  <div id="map"></div>
+  <!-- <div class="over">MEOW</div> -->
+</div>
+</div>
+
+<script>
+var SW = new L.latLng(-65, -170),
+    NE = new L.latLng(65, 170),
+    b = new L.latLngBounds(SW, NE);
+var map = L.map('map',{
+  zoomControl:false,
+  attributionControl:false,
+noWrap: true,
+  maxBounds: b
+}).setView([0, 66], 5);
+        L.tileLayer('map/{z}/{x}/{y}.png', {
+            minZoom: 0,
+            maxZoom: 6,
+            tms: true,
+            noWrap: true
+        }).addTo(map);
+        // L.control.attribution( {
+        //   prefix: false,
+        //   position:	'topleft'
+        // } ).addTo(map);
+        // L.control.zoom( {
+        //   position:	'bottomright',
+        // } ).addTo(map);
+</script>
+
+</body>
+
+</html>
